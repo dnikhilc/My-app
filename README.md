@@ -1,2 +1,4 @@
-# My-app
-App to sell and buy things
+# Meal-O
+
+
+Application for placing food delivery order.
