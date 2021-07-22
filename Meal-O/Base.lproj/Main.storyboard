@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,10 +17,75 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qZV-IA-kk1">
+                                <rect key="frame" x="0.0" y="737" width="414" height="125"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="BaM-N8-NGT"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="h8C-Y1-bLv">
+                                    <size key="itemSize" width="150" height="126.5"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CellRestaurant" id="IAR-PX-3Vu" customClass="CellRestaurant" customModule="Meal_O" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="-1" width="150" height="126.5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zmB-uU-kgb">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="126.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PKc-NM-Z9d">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="106.5"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYA-fP-dfL">
+                                                    <rect key="frame" x="8" y="106.5" width="134" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="Cf1-8d-0iJ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="PKc-NM-Z9d" firstAttribute="top" secondItem="zmB-uU-kgb" secondAttribute="top" id="FFV-2o-eOv"/>
+                                                <constraint firstAttribute="trailing" secondItem="rYA-fP-dfL" secondAttribute="trailing" constant="8" id="Grt-fm-kXu"/>
+                                                <constraint firstItem="rYA-fP-dfL" firstAttribute="top" secondItem="PKc-NM-Z9d" secondAttribute="bottom" id="JVP-LP-Q4m"/>
+                                                <constraint firstAttribute="bottom" secondItem="rYA-fP-dfL" secondAttribute="bottom" id="Wqf-wX-jMa"/>
+                                                <constraint firstItem="PKc-NM-Z9d" firstAttribute="leading" secondItem="zmB-uU-kgb" secondAttribute="leading" id="YCz-bk-Asi"/>
+                                                <constraint firstAttribute="trailing" secondItem="PKc-NM-Z9d" secondAttribute="trailing" id="bGQ-vM-NWJ"/>
+                                                <constraint firstItem="rYA-fP-dfL" firstAttribute="leading" secondItem="zmB-uU-kgb" secondAttribute="leading" constant="8" id="cwv-XA-XGb"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="150" height="126.5"/>
+                                        <connections>
+                                            <outlet property="imageViewRestaurant" destination="PKc-NM-Z9d" id="mK3-sf-Hm0"/>
+                                            <outlet property="lblRestaurantName" destination="rYA-fP-dfL" id="lCi-l3-JNi"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="g5Z-6q-dug"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="k5a-km-6CZ"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qZV-IA-kk1" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="B3Q-1z-xC1"/>
+                            <constraint firstItem="qZV-IA-kk1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="I2E-PD-pR0"/>
+                            <constraint firstItem="qZV-IA-kk1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cko-Xa-HYr"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qRl-Yk-fui"/>
+                    <connections>
+                        <outlet property="collectionViewRestaurant" destination="qZV-IA-kk1" id="b1L-pA-j8I"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

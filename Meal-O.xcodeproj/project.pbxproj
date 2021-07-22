@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		0E3A94D426A838FB00C3DF62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E3A94D226A838FB00C3DF62 /* Main.storyboard */; };
 		0E3A94D626A838FB00C3DF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E3A94D526A838FB00C3DF62 /* Assets.xcassets */; };
 		0E3A94D926A838FB00C3DF62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E3A94D726A838FB00C3DF62 /* LaunchScreen.storyboard */; };
+		0E9BC22A26A9854B00A405FB /* RestaurantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9BC22926A9854B00A405FB /* RestaurantModel.swift */; };
 		DCFD0EE99993B1E80E58C126 /* Pods_Meal_O.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9B5E0E7A757BDA01123C9D /* Pods_Meal_O.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		0E3A94D526A838FB00C3DF62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E3A94D826A838FB00C3DF62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0E3A94DA26A838FB00C3DF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E9BC22926A9854B00A405FB /* RestaurantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantModel.swift; sourceTree = "<group>"; };
 		6C2703B4091F1156D7C39EE6 /* Pods-Meal-O.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meal-O.release.xcconfig"; path = "Target Support Files/Pods-Meal-O/Pods-Meal-O.release.xcconfig"; sourceTree = "<group>"; };
 		78F5F212858EA7C113C781CF /* Pods-Meal-O.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meal-O.debug.xcconfig"; path = "Target Support Files/Pods-Meal-O/Pods-Meal-O.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,6 +68,7 @@
 				0E3A94CC26A838FB00C3DF62 /* AppDelegate.swift */,
 				0E3A94CE26A838FB00C3DF62 /* SceneDelegate.swift */,
 				0E3A94D026A838FB00C3DF62 /* ViewController.swift */,
+				0E9BC22926A9854B00A405FB /* RestaurantModel.swift */,
 				0E3A94D226A838FB00C3DF62 /* Main.storyboard */,
 				0E3A94D526A838FB00C3DF62 /* Assets.xcassets */,
 				0E3A94D726A838FB00C3DF62 /* LaunchScreen.storyboard */,
@@ -88,7 +91,6 @@
 				78F5F212858EA7C113C781CF /* Pods-Meal-O.debug.xcconfig */,
 				6C2703B4091F1156D7C39EE6 /* Pods-Meal-O.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -208,6 +210,7 @@
 			files = (
 				0E3A94D126A838FB00C3DF62 /* ViewController.swift in Sources */,
 				0E3A94CD26A838FB00C3DF62 /* AppDelegate.swift in Sources */,
+				0E9BC22A26A9854B00A405FB /* RestaurantModel.swift in Sources */,
 				0E3A94CF26A838FB00C3DF62 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
