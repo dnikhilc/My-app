@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -19,193 +19,320 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		7C1A66CB4C797287604988A8E71469FB /* Pods-Meal-O-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B6A10412B564AA8518B4983A648169 /* Pods-Meal-O-dummy.m */; };
-		A836B500364FF4064AD995C483864E5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		D339B4D64DE254CCDF065367FC18E153 /* Pods-Meal-O-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 331EE204CE00FAE1EB014FB2CDD764D1 /* Pods-Meal-O-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05D1EAFD30B1895CA3D3B263C4A3C5B8 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E158E7A468513B7C979DD550C6DC2AFD /* CoreLocation.swift */; };
+		06D3AF19FE066F0FC19CAA7045465F10 /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5791FD91F256131FF78C68E744185E /* Polygon.swift */; };
+		093DB97B8475D1C9B4B20AD25831482E /* FeatureIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B06ADCAC83C33A5AF100A9716F818A /* FeatureIdentifier.swift */; };
+		0DFEF3A95F0F4A2C47F689710FBFBBB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258C9F4C872E3DCF4952859496043CE7 /* Foundation.framework */; };
+		1936D9B162E5AB79B1539F97D3015901 /* Pods-Meal-O-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 114A07D49889060C1C8C11F81EE1EF0F /* Pods-Meal-O-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		23F29C3CF51E6406BD0DEAF17CD72673 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FB804F0B1DA4729EC0A2CC9C377680 /* Point.swift */; };
+		2505BA03B4893D0B8C6C32FA591E9D58 /* GeometryCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E770683C32086E385EF93201CAFBC4AE /* GeometryCollection.swift */; };
+		31A27C05CDC86BE0AC62888130452FEC /* Turf-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EBA01CC7E2A9A1C814EF74FD7B286820 /* Turf-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3AD2FFC80D5844BFF39C0ACAEECE98A9 /* RadianCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673DA378D05EBF6E25FB1DAE09D145F4 /* RadianCoordinate2D.swift */; };
+		413446E62DCC132A26757D26CABEC8D6 /* LineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3B621EEB3EECEA656A868D6E5B6757 /* LineString.swift */; };
+		471ECA14423FB1A514581C0126066098 /* Turf.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB525CBF04EABBC326849B91097C7AFC /* Turf.swift */; };
+		47FAAA05863268B1299BEDE6E807288F /* MultiPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8547FA8F6A6E502E9A6261C197233BFE /* MultiPolygon.swift */; };
+		4E8D35CB6EE8C7ECDD49A014254DC533 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5492BD54D3D90671E9062117E95667C5 /* Codable.swift */; };
+		63F436AF7B0111ACC9DC3633F892FAB7 /* Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF7A5F9B5199CA7EB9B6BB983BB10E /* Ring.swift */; };
+		68617553D6E30AB9B5C2C00A8B6473C1 /* Pods-Meal-O-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A76EFE7986275EFB8CADE5C6EC76E66 /* Pods-Meal-O-dummy.m */; };
+		70545320FC0C6EC55371366724989176 /* MultiPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9892959F5473EBA8D06C184D3A0D7119 /* MultiPoint.swift */; };
+		70A90147B8D72867BBFAE71248C9A795 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258C9F4C872E3DCF4952859496043CE7 /* Foundation.framework */; };
+		764DA2744CE85D9B64CE0FBFAE1FE7C1 /* Turf-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F28AFAF33E7EDF27374A79050C7879EE /* Turf-dummy.m */; };
+		84E397C6910512C0C3DDDEBF10050362 /* MultiLineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD211B89DDCB4859C95B406B237E60D6 /* MultiLineString.swift */; };
+		91EAA8FD09F0D214E1BB0FA8D5CE9173 /* Spline.swift in Sources */ = {isa = PBXBuildFile; fileRef = D611399E5B0A3C36B7E6AF5AA2B0C07F /* Spline.swift */; };
+		A7AF76C4D16E4EECF477871E3399722E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D93EBFFAF55AAE5502A5CCFF03D6D89B /* CoreLocation.framework */; };
+		A7B0C49960807A2FD8067089FC7F248F /* GeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9797719CD253E9947080679B5843062 /* GeoJSON.swift */; };
+		C4610E44590A28D1128006AFA1D83F9A /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7E081EF816ACBF46E264C99BB5DD34 /* BoundingBox.swift */; };
+		CC006E3058B851C7BE3F895DBACD5E15 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B2F5908FDF618D3D4855CBC0510197 /* Geometry.swift */; };
+		CF37487CCA27F8D56C59131323F7D783 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D09256DE5549FC734938BE082B55BC9 /* Feature.swift */; };
+		DF23E9D255CB36965A33CCF19CB6C3F1 /* Turf.h in Headers */ = {isa = PBXBuildFile; fileRef = 90D9DC165B253E63366AB1BF647A4BF9 /* Turf.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FEEF8F25F03DEA3C94CC2B2B6EC7314E /* FeatureCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583B80EF22957F3B21B9104BF43A1605 /* FeatureCollection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4DBA7FB7915BD44E3F134E7ECCADEC91 /* PBXContainerItemProxy */ = {
+		69A71B152B9D5DB2C8351EC27025E6E6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E5B4BBC6DD552AC8943C7E22772FC1D3;
 			remoteInfo = GoogleMaps;
 		};
+		F8A808658DA5D6FCA7326450596A82A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65241501A90844E924E6FEC62E9C051D;
+			remoteInfo = Turf;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01AF48CF5646ADAB5D7324A8169AFF03 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Maps/Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
-		331EE204CE00FAE1EB014FB2CDD764D1 /* Pods-Meal-O-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Meal-O-umbrella.h"; sourceTree = "<group>"; };
-		3E409A64289B42E793CD82944EDA8009 /* Pods-Meal-O.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Meal-O.release.xcconfig"; sourceTree = "<group>"; };
+		03FB804F0B1DA4729EC0A2CC9C377680 /* Point.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Point.swift; path = Sources/Turf/Geometries/Point.swift; sourceTree = "<group>"; };
+		07319F9C790A1FE691BC4623B5F3C441 /* Pods-Meal-O-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Meal-O-Info.plist"; sourceTree = "<group>"; };
+		0E5791FD91F256131FF78C68E744185E /* Polygon.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Polygon.swift; path = Sources/Turf/Geometries/Polygon.swift; sourceTree = "<group>"; };
+		114A07D49889060C1C8C11F81EE1EF0F /* Pods-Meal-O-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Meal-O-umbrella.h"; sourceTree = "<group>"; };
+		258C9F4C872E3DCF4952859496043CE7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		2A76EFE7986275EFB8CADE5C6EC76E66 /* Pods-Meal-O-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Meal-O-dummy.m"; sourceTree = "<group>"; };
+		2D09256DE5549FC734938BE082B55BC9 /* Feature.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Feature.swift; path = Sources/Turf/Feature.swift; sourceTree = "<group>"; };
+		36B06ADCAC83C33A5AF100A9716F818A /* FeatureIdentifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FeatureIdentifier.swift; path = Sources/Turf/FeatureIdentifier.swift; sourceTree = "<group>"; };
 		4080F826E52627DDB0A4277B8402F1BA /* Pods_Meal_O.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Meal_O.framework; path = "Pods-Meal-O.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D0B71C15B7669A35B906B98B3EB1D5F /* Pods-Meal-O-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Meal-O-resources.sh"; sourceTree = "<group>"; };
-		6CF2D2D4C2AB98BDD396BDA1E91CE1C2 /* Pods-Meal-O.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Meal-O.modulemap"; sourceTree = "<group>"; };
-		6DA105142B3927D224C8E4D4074BC123 /* Pods-Meal-O-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Meal-O-acknowledgements.plist"; sourceTree = "<group>"; };
-		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		90E4D73B9CF1766F5EE2D7651866082A /* Pods-Meal-O-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Meal-O-acknowledgements.markdown"; sourceTree = "<group>"; };
+		43C2ADDDF43F82072A3A76BDBA40A699 /* Pods-Meal-O-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Meal-O-acknowledgements.plist"; sourceTree = "<group>"; };
+		4AD1E73336D00F82A3BC3FBCFB8C1C18 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Maps/Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
+		4E48FF6A00D9E956E2D39CDD32114742 /* Turf-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Turf-Info.plist"; sourceTree = "<group>"; };
+		504CE9473CDB9F0B95C72BA4BF8F4273 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Turf.framework; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5492BD54D3D90671E9062117E95667C5 /* Codable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Codable.swift; path = Sources/Turf/Codable.swift; sourceTree = "<group>"; };
+		55BABE131CC010AB87D4F8131338BBCB /* Pods-Meal-O-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Meal-O-acknowledgements.markdown"; sourceTree = "<group>"; };
+		583B80EF22957F3B21B9104BF43A1605 /* FeatureCollection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FeatureCollection.swift; path = Sources/Turf/FeatureCollection.swift; sourceTree = "<group>"; };
+		5E6F972D18A278169FC80BC4F9EB841D /* GoogleMaps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleMaps.release.xcconfig; sourceTree = "<group>"; };
+		673DA378D05EBF6E25FB1DAE09D145F4 /* RadianCoordinate2D.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadianCoordinate2D.swift; path = Sources/Turf/RadianCoordinate2D.swift; sourceTree = "<group>"; };
+		67E217FC030FB93A9A9C1A15EF712FEA /* GoogleMaps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleMaps.debug.xcconfig; sourceTree = "<group>"; };
+		6F661FE9D4279A2FB76AF4A57ED5640F /* Turf.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Turf.debug.xcconfig; sourceTree = "<group>"; };
+		793FE13519890B1AFE6B903CFE5E9BDB /* Turf-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Turf-prefix.pch"; sourceTree = "<group>"; };
+		7C11435D7279A4753085014E77F6DBDA /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		83BEC4739C3600E1EDCFF61E56DA131B /* Pods-Meal-O.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Meal-O.release.xcconfig"; sourceTree = "<group>"; };
+		846B14A721A8F70276DB3F17BCC801D6 /* Turf.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Turf.release.xcconfig; sourceTree = "<group>"; };
+		8547FA8F6A6E502E9A6261C197233BFE /* MultiPolygon.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultiPolygon.swift; path = Sources/Turf/Geometries/MultiPolygon.swift; sourceTree = "<group>"; };
+		90D9DC165B253E63366AB1BF647A4BF9 /* Turf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Turf.h; path = Sources/Turf/Turf.h; sourceTree = "<group>"; };
+		9892959F5473EBA8D06C184D3A0D7119 /* MultiPoint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultiPoint.swift; path = Sources/Turf/Geometries/MultiPoint.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		AABE3D21F0BE384435A5D7C08A8FD5BB /* GoogleMaps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleMaps.debug.xcconfig; sourceTree = "<group>"; };
-		C3D0978B919EA2ECF2A2F8466075BB51 /* GoogleMaps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleMaps.release.xcconfig; sourceTree = "<group>"; };
-		CCAF84BDED2FB6E96E950E18E0742136 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = Base/Frameworks/GoogleMapsBase.framework; sourceTree = "<group>"; };
-		D6B6A10412B564AA8518B4983A648169 /* Pods-Meal-O-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Meal-O-dummy.m"; sourceTree = "<group>"; };
-		D84FEC2176B689758BD7170226084AC7 /* Pods-Meal-O.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Meal-O.debug.xcconfig"; sourceTree = "<group>"; };
-		E2309F84CDF17FF87E66D6CDB6B517AB /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
-		E2F4E7C722407F81715B67A5F9EC4FAD /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsCore.framework; path = Maps/Frameworks/GoogleMapsCore.framework; sourceTree = "<group>"; };
-		FF799758F93E20B76E4CD5E3619363C8 /* Pods-Meal-O-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Meal-O-Info.plist"; sourceTree = "<group>"; };
+		9F7E081EF816ACBF46E264C99BB5DD34 /* BoundingBox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BoundingBox.swift; path = Sources/Turf/BoundingBox.swift; sourceTree = "<group>"; };
+		AD1A04C63715E23788EA54C1DDDF4168 /* Pods-Meal-O.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Meal-O.debug.xcconfig"; sourceTree = "<group>"; };
+		B9797719CD253E9947080679B5843062 /* GeoJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GeoJSON.swift; path = Sources/Turf/GeoJSON.swift; sourceTree = "<group>"; };
+		BB525CBF04EABBC326849B91097C7AFC /* Turf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Turf.swift; path = Sources/Turf/Turf.swift; sourceTree = "<group>"; };
+		CD211B89DDCB4859C95B406B237E60D6 /* MultiLineString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultiLineString.swift; path = Sources/Turf/Geometries/MultiLineString.swift; sourceTree = "<group>"; };
+		D1B2F5908FDF618D3D4855CBC0510197 /* Geometry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Geometry.swift; path = Sources/Turf/Geometry.swift; sourceTree = "<group>"; };
+		D3381202A0D29EFC1A5B2D0915510443 /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsCore.framework; path = Maps/Frameworks/GoogleMapsCore.framework; sourceTree = "<group>"; };
+		D611399E5B0A3C36B7E6AF5AA2B0C07F /* Spline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Spline.swift; path = Sources/Turf/Spline.swift; sourceTree = "<group>"; };
+		D669C1C049E7A4ED32A87520CB958925 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = Base/Frameworks/GoogleMapsBase.framework; sourceTree = "<group>"; };
+		D93EBFFAF55AAE5502A5CCFF03D6D89B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
+		DBA9C1F97A7E95088E3DB2AF077E0089 /* Pods-Meal-O-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Meal-O-resources.sh"; sourceTree = "<group>"; };
+		E158E7A468513B7C979DD550C6DC2AFD /* CoreLocation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreLocation.swift; path = Sources/Turf/CoreLocation.swift; sourceTree = "<group>"; };
+		E1BA1DDB8B9F9D1B1818D631ECA8632C /* Pods-Meal-O.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Meal-O.modulemap"; sourceTree = "<group>"; };
+		E770683C32086E385EF93201CAFBC4AE /* GeometryCollection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GeometryCollection.swift; path = Sources/Turf/Geometries/GeometryCollection.swift; sourceTree = "<group>"; };
+		E9B0BADD1DDCFD1E313455847DD5EE74 /* Pods-Meal-O-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Meal-O-frameworks.sh"; sourceTree = "<group>"; };
+		EB3B621EEB3EECEA656A868D6E5B6757 /* LineString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineString.swift; path = Sources/Turf/Geometries/LineString.swift; sourceTree = "<group>"; };
+		EBA01CC7E2A9A1C814EF74FD7B286820 /* Turf-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Turf-umbrella.h"; sourceTree = "<group>"; };
+		F28AFAF33E7EDF27374A79050C7879EE /* Turf-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Turf-dummy.m"; sourceTree = "<group>"; };
+		F9CF7A5F9B5199CA7EB9B6BB983BB10E /* Ring.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Ring.swift; path = Sources/Turf/Ring.swift; sourceTree = "<group>"; };
+		FF5B88FAACEF3E032EC21642C619F561 /* Turf.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Turf.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A1B74DD223F5D4EF4DFAC02EA9B5D082 /* Frameworks */ = {
+		C09659D437400CE4FCE87A7BCD64EB86 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A836B500364FF4064AD995C483864E5E /* Foundation.framework in Frameworks */,
+				70A90147B8D72867BBFAE71248C9A795 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3489386CD23EA6CA4A40996B055837E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7AF76C4D16E4EECF477871E3399722E /* CoreLocation.framework in Frameworks */,
+				0DFEF3A95F0F4A2C47F689710FBFBBB0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1AEA1CF3E36FF8113F6FFD7526BE5F98 /* Frameworks */ = {
+		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CCAF84BDED2FB6E96E950E18E0742136 /* GoogleMapsBase.framework */,
+				2BAFBDB83E3D6316966EB82364FA2F7B /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		23258B9441300E23C80256BEEFD1F964 /* GoogleMaps */ = {
+		19B0F37A39FA89654B87AD0D704FB68C /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				5FCC553E82707BA26B1F6EDC00161B0D /* Base */,
-				387015716759109261086A8C0CA736F5 /* Maps */,
-				9601491F11C5653D98D1EB5DF2155DFE /* Support Files */,
+				FF5B88FAACEF3E032EC21642C619F561 /* Turf.modulemap */,
+				F28AFAF33E7EDF27374A79050C7879EE /* Turf-dummy.m */,
+				4E48FF6A00D9E956E2D39CDD32114742 /* Turf-Info.plist */,
+				793FE13519890B1AFE6B903CFE5E9BDB /* Turf-prefix.pch */,
+				EBA01CC7E2A9A1C814EF74FD7B286820 /* Turf-umbrella.h */,
+				6F661FE9D4279A2FB76AF4A57ED5640F /* Turf.debug.xcconfig */,
+				846B14A721A8F70276DB3F17BCC801D6 /* Turf.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Turf";
+			sourceTree = "<group>";
+		};
+		2740CEA7661976FB6CC45E1C1015E6A6 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				67E217FC030FB93A9A9C1A15EF712FEA /* GoogleMaps.debug.xcconfig */,
+				5E6F972D18A278169FC80BC4F9EB841D /* GoogleMaps.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/GoogleMaps";
+			sourceTree = "<group>";
+		};
+		2BAFBDB83E3D6316966EB82364FA2F7B /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D93EBFFAF55AAE5502A5CCFF03D6D89B /* CoreLocation.framework */,
+				258C9F4C872E3DCF4952859496043CE7 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		320FF82FBD324BBC2527A852D01FBA03 /* GoogleMaps */ = {
+			isa = PBXGroup;
+			children = (
+				E5CFB3DC7E2238F69BBEE521C0B7EA04 /* Base */,
+				3B27BD85F344368326B8E6F454287F89 /* Maps */,
+				2740CEA7661976FB6CC45E1C1015E6A6 /* Support Files */,
 			);
 			name = GoogleMaps;
 			path = GoogleMaps;
 			sourceTree = "<group>";
 		};
-		302A4A313E55462CE04EB82774105108 /* Products */ = {
+		3B27BD85F344368326B8E6F454287F89 /* Maps */ = {
 			isa = PBXGroup;
 			children = (
-				4080F826E52627DDB0A4277B8402F1BA /* Pods_Meal_O.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		332F6212FF3F43387281E214F001E6BA /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				41815DEBF1253591D82C83CA32491F9D /* Pods-Meal-O */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		387015716759109261086A8C0CA736F5 /* Maps */ = {
-			isa = PBXGroup;
-			children = (
-				F9621E38CA93CD5E47C3F28B4F0AF3DD /* Frameworks */,
-				E48211C21EA696EBC32B31525F5FFA67 /* Resources */,
+				BA449416896A4E375780FCCCB385BF50 /* Frameworks */,
+				D977AB94889166116B3686131FD7F8C8 /* Resources */,
 			);
 			name = Maps;
 			sourceTree = "<group>";
 		};
-		41815DEBF1253591D82C83CA32491F9D /* Pods-Meal-O */ = {
+		3F460CC59B4D508FC0F74000C7B342D4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6CF2D2D4C2AB98BDD396BDA1E91CE1C2 /* Pods-Meal-O.modulemap */,
-				90E4D73B9CF1766F5EE2D7651866082A /* Pods-Meal-O-acknowledgements.markdown */,
-				6DA105142B3927D224C8E4D4074BC123 /* Pods-Meal-O-acknowledgements.plist */,
-				D6B6A10412B564AA8518B4983A648169 /* Pods-Meal-O-dummy.m */,
-				FF799758F93E20B76E4CD5E3619363C8 /* Pods-Meal-O-Info.plist */,
-				5D0B71C15B7669A35B906B98B3EB1D5F /* Pods-Meal-O-resources.sh */,
-				331EE204CE00FAE1EB014FB2CDD764D1 /* Pods-Meal-O-umbrella.h */,
-				D84FEC2176B689758BD7170226084AC7 /* Pods-Meal-O.debug.xcconfig */,
-				3E409A64289B42E793CD82944EDA8009 /* Pods-Meal-O.release.xcconfig */,
+				320FF82FBD324BBC2527A852D01FBA03 /* GoogleMaps */,
+				FE7DD59A16DAE83839B6ABDA88199DB3 /* Turf */,
 			);
-			name = "Pods-Meal-O";
-			path = "Target Support Files/Pods-Meal-O";
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+		4EE00F0F07E51FAE7ECB638C738D1939 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+				F921BA20511DBD1287224E2D120943F4 /* Pods-Meal-O */,
 			);
-			name = iOS;
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		5FCC553E82707BA26B1F6EDC00161B0D /* Base */ = {
+		BA449416896A4E375780FCCCB385BF50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1AEA1CF3E36FF8113F6FFD7526BE5F98 /* Frameworks */,
+				4AD1E73336D00F82A3BC3FBCFB8C1C18 /* GoogleMaps.framework */,
+				D3381202A0D29EFC1A5B2D0915510443 /* GoogleMapsCore.framework */,
 			);
-			name = Base;
-			sourceTree = "<group>";
-		};
-		9601491F11C5653D98D1EB5DF2155DFE /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				AABE3D21F0BE384435A5D7C08A8FD5BB /* GoogleMaps.debug.xcconfig */,
-				C3D0978B919EA2ECF2A2F8466075BB51 /* GoogleMaps.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/GoogleMaps";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				DF3634087891871FA7B65CC4A8E6DB71 /* Pods */,
-				302A4A313E55462CE04EB82774105108 /* Products */,
-				332F6212FF3F43387281E214F001E6BA /* Targets Support Files */,
+				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
+				3F460CC59B4D508FC0F74000C7B342D4 /* Pods */,
+				E4075497401DEB30191F1009039E2F08 /* Products */,
+				4EE00F0F07E51FAE7ECB638C738D1939 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+		D977AB94889166116B3686131FD7F8C8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				578452D2E740E91742655AC8F1636D1F /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DF3634087891871FA7B65CC4A8E6DB71 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				23258B9441300E23C80256BEEFD1F964 /* GoogleMaps */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		E48211C21EA696EBC32B31525F5FFA67 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				E2309F84CDF17FF87E66D6CDB6B517AB /* GoogleMaps.bundle */,
+				7C11435D7279A4753085014E77F6DBDA /* GoogleMaps.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		F9621E38CA93CD5E47C3F28B4F0AF3DD /* Frameworks */ = {
+		E3D5A27F82C0F2AEE71055FD5935BAB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				01AF48CF5646ADAB5D7324A8169AFF03 /* GoogleMaps.framework */,
-				E2F4E7C722407F81715B67A5F9EC4FAD /* GoogleMapsCore.framework */,
+				D669C1C049E7A4ED32A87520CB958925 /* GoogleMapsBase.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4075497401DEB30191F1009039E2F08 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4080F826E52627DDB0A4277B8402F1BA /* Pods_Meal_O.framework */,
+				504CE9473CDB9F0B95C72BA4BF8F4273 /* Turf.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E5CFB3DC7E2238F69BBEE521C0B7EA04 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				E3D5A27F82C0F2AEE71055FD5935BAB2 /* Frameworks */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		F921BA20511DBD1287224E2D120943F4 /* Pods-Meal-O */ = {
+			isa = PBXGroup;
+			children = (
+				E1BA1DDB8B9F9D1B1818D631ECA8632C /* Pods-Meal-O.modulemap */,
+				55BABE131CC010AB87D4F8131338BBCB /* Pods-Meal-O-acknowledgements.markdown */,
+				43C2ADDDF43F82072A3A76BDBA40A699 /* Pods-Meal-O-acknowledgements.plist */,
+				2A76EFE7986275EFB8CADE5C6EC76E66 /* Pods-Meal-O-dummy.m */,
+				E9B0BADD1DDCFD1E313455847DD5EE74 /* Pods-Meal-O-frameworks.sh */,
+				07319F9C790A1FE691BC4623B5F3C441 /* Pods-Meal-O-Info.plist */,
+				DBA9C1F97A7E95088E3DB2AF077E0089 /* Pods-Meal-O-resources.sh */,
+				114A07D49889060C1C8C11F81EE1EF0F /* Pods-Meal-O-umbrella.h */,
+				AD1A04C63715E23788EA54C1DDDF4168 /* Pods-Meal-O.debug.xcconfig */,
+				83BEC4739C3600E1EDCFF61E56DA131B /* Pods-Meal-O.release.xcconfig */,
+			);
+			name = "Pods-Meal-O";
+			path = "Target Support Files/Pods-Meal-O";
+			sourceTree = "<group>";
+		};
+		FE7DD59A16DAE83839B6ABDA88199DB3 /* Turf */ = {
+			isa = PBXGroup;
+			children = (
+				9F7E081EF816ACBF46E264C99BB5DD34 /* BoundingBox.swift */,
+				5492BD54D3D90671E9062117E95667C5 /* Codable.swift */,
+				E158E7A468513B7C979DD550C6DC2AFD /* CoreLocation.swift */,
+				2D09256DE5549FC734938BE082B55BC9 /* Feature.swift */,
+				583B80EF22957F3B21B9104BF43A1605 /* FeatureCollection.swift */,
+				36B06ADCAC83C33A5AF100A9716F818A /* FeatureIdentifier.swift */,
+				B9797719CD253E9947080679B5843062 /* GeoJSON.swift */,
+				D1B2F5908FDF618D3D4855CBC0510197 /* Geometry.swift */,
+				E770683C32086E385EF93201CAFBC4AE /* GeometryCollection.swift */,
+				EB3B621EEB3EECEA656A868D6E5B6757 /* LineString.swift */,
+				CD211B89DDCB4859C95B406B237E60D6 /* MultiLineString.swift */,
+				9892959F5473EBA8D06C184D3A0D7119 /* MultiPoint.swift */,
+				8547FA8F6A6E502E9A6261C197233BFE /* MultiPolygon.swift */,
+				03FB804F0B1DA4729EC0A2CC9C377680 /* Point.swift */,
+				0E5791FD91F256131FF78C68E744185E /* Polygon.swift */,
+				673DA378D05EBF6E25FB1DAE09D145F4 /* RadianCoordinate2D.swift */,
+				F9CF7A5F9B5199CA7EB9B6BB983BB10E /* Ring.swift */,
+				D611399E5B0A3C36B7E6AF5AA2B0C07F /* Spline.swift */,
+				90D9DC165B253E63366AB1BF647A4BF9 /* Turf.h */,
+				BB525CBF04EABBC326849B91097C7AFC /* Turf.swift */,
+				19B0F37A39FA89654B87AD0D704FB68C /* Support Files */,
+			);
+			name = Turf;
+			path = Turf;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		269FC65FD7CD4EAD83F0C3EBC1976DB1 /* Headers */ = {
+		D96D6A6829BD7C527AFCD3B780AD7F32 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D339B4D64DE254CCDF065367FC18E153 /* Pods-Meal-O-umbrella.h in Headers */,
+				31A27C05CDC86BE0AC62888130452FEC /* Turf-umbrella.h in Headers */,
+				DF23E9D255CB36965A33CCF19CB6C3F1 /* Turf.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2B326A67171C6D570881C9DA236C5B0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1936D9B162E5AB79B1539F97D3015901 /* Pods-Meal-O-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,21 +341,40 @@
 /* Begin PBXNativeTarget section */
 		12C137CEC43C0CC804EA7BC2226EDB20 /* Pods-Meal-O */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A1680A0B80544196B3B19A6529A29F04 /* Build configuration list for PBXNativeTarget "Pods-Meal-O" */;
+			buildConfigurationList = 58888AE8E3210987B6D6809CD00205F9 /* Build configuration list for PBXNativeTarget "Pods-Meal-O" */;
 			buildPhases = (
-				269FC65FD7CD4EAD83F0C3EBC1976DB1 /* Headers */,
-				67BE5100DCC6B3F746B007B389B1917B /* Sources */,
-				A1B74DD223F5D4EF4DFAC02EA9B5D082 /* Frameworks */,
-				B5A4115AD49814D8A7394DD00D8C2730 /* Resources */,
+				E2B326A67171C6D570881C9DA236C5B0 /* Headers */,
+				F84E1614BA85031E6A2AD7ECEFFCB9B6 /* Sources */,
+				C09659D437400CE4FCE87A7BCD64EB86 /* Frameworks */,
+				7ECA48D9274C25ACF20C321CC2F33E34 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				432D1D9FB3389881B7DCB98148F41C7A /* PBXTargetDependency */,
+				ACE2DB72DF13552AD003F035D9759270 /* PBXTargetDependency */,
+				BC3A7A1A6A5233190805AB77356FD1E0 /* PBXTargetDependency */,
 			);
 			name = "Pods-Meal-O";
 			productName = "Pods-Meal-O";
 			productReference = 4080F826E52627DDB0A4277B8402F1BA /* Pods_Meal_O.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		65241501A90844E924E6FEC62E9C051D /* Turf */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7A6CBEC48D446D292DE4454EBFCF263 /* Build configuration list for PBXNativeTarget "Turf" */;
+			buildPhases = (
+				D96D6A6829BD7C527AFCD3B780AD7F32 /* Headers */,
+				6E569E1CB7BD01A5D60D7E91493F3969 /* Sources */,
+				E3489386CD23EA6CA4A40996B055837E /* Frameworks */,
+				1F4A14C974E9ACEC7CA69FA9487036F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Turf;
+			productName = Turf;
+			productReference = 504CE9473CDB9F0B95C72BA4BF8F4273 /* Turf.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -241,7 +387,7 @@
 				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -249,18 +395,26 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 302A4A313E55462CE04EB82774105108 /* Products */;
+			productRefGroup = E4075497401DEB30191F1009039E2F08 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				E5B4BBC6DD552AC8943C7E22772FC1D3 /* GoogleMaps */,
 				12C137CEC43C0CC804EA7BC2226EDB20 /* Pods-Meal-O */,
+				65241501A90844E924E6FEC62E9C051D /* Turf */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B5A4115AD49814D8A7394DD00D8C2730 /* Resources */ = {
+		1F4A14C974E9ACEC7CA69FA9487036F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7ECA48D9274C25ACF20C321CC2F33E34 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -270,29 +424,62 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		67BE5100DCC6B3F746B007B389B1917B /* Sources */ = {
+		6E569E1CB7BD01A5D60D7E91493F3969 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C1A66CB4C797287604988A8E71469FB /* Pods-Meal-O-dummy.m in Sources */,
+				C4610E44590A28D1128006AFA1D83F9A /* BoundingBox.swift in Sources */,
+				4E8D35CB6EE8C7ECDD49A014254DC533 /* Codable.swift in Sources */,
+				05D1EAFD30B1895CA3D3B263C4A3C5B8 /* CoreLocation.swift in Sources */,
+				CF37487CCA27F8D56C59131323F7D783 /* Feature.swift in Sources */,
+				FEEF8F25F03DEA3C94CC2B2B6EC7314E /* FeatureCollection.swift in Sources */,
+				093DB97B8475D1C9B4B20AD25831482E /* FeatureIdentifier.swift in Sources */,
+				A7B0C49960807A2FD8067089FC7F248F /* GeoJSON.swift in Sources */,
+				CC006E3058B851C7BE3F895DBACD5E15 /* Geometry.swift in Sources */,
+				2505BA03B4893D0B8C6C32FA591E9D58 /* GeometryCollection.swift in Sources */,
+				413446E62DCC132A26757D26CABEC8D6 /* LineString.swift in Sources */,
+				84E397C6910512C0C3DDDEBF10050362 /* MultiLineString.swift in Sources */,
+				70545320FC0C6EC55371366724989176 /* MultiPoint.swift in Sources */,
+				47FAAA05863268B1299BEDE6E807288F /* MultiPolygon.swift in Sources */,
+				23F29C3CF51E6406BD0DEAF17CD72673 /* Point.swift in Sources */,
+				06D3AF19FE066F0FC19CAA7045465F10 /* Polygon.swift in Sources */,
+				3AD2FFC80D5844BFF39C0ACAEECE98A9 /* RadianCoordinate2D.swift in Sources */,
+				63F436AF7B0111ACC9DC3633F892FAB7 /* Ring.swift in Sources */,
+				91EAA8FD09F0D214E1BB0FA8D5CE9173 /* Spline.swift in Sources */,
+				764DA2744CE85D9B64CE0FBFAE1FE7C1 /* Turf-dummy.m in Sources */,
+				471ECA14423FB1A514581C0126066098 /* Turf.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F84E1614BA85031E6A2AD7ECEFFCB9B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68617553D6E30AB9B5C2C00A8B6473C1 /* Pods-Meal-O-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		432D1D9FB3389881B7DCB98148F41C7A /* PBXTargetDependency */ = {
+		ACE2DB72DF13552AD003F035D9759270 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GoogleMaps;
 			target = E5B4BBC6DD552AC8943C7E22772FC1D3 /* GoogleMaps */;
-			targetProxy = 4DBA7FB7915BD44E3F134E7ECCADEC91 /* PBXContainerItemProxy */;
+			targetProxy = 69A71B152B9D5DB2C8351EC27025E6E6 /* PBXContainerItemProxy */;
+		};
+		BC3A7A1A6A5233190805AB77356FD1E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Turf;
+			target = 65241501A90844E924E6FEC62E9C051D /* Turf */;
+			targetProxy = F8A808658DA5D6FCA7326450596A82A9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5834AEB702FC0743E58BBE60D611434A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AABE3D21F0BE384435A5D7C08A8FD5BB /* GoogleMaps.debug.xcconfig */;
+			baseConfigurationReference = 67E217FC030FB93A9A9C1A15EF712FEA /* GoogleMaps.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -309,7 +496,7 @@
 		};
 		67B107ED17C6C18DC4B8B4D3356E049A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C3D0978B919EA2ECF2A2F8466075BB51 /* GoogleMaps.release.xcconfig */;
+			baseConfigurationReference = 5E6F972D18A278169FC80BC4F9EB841D /* GoogleMaps.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -322,81 +509,6 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		6BCCBA4ED9B2C8245AEA8A260EE24971 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D84FEC2176B689758BD7170226084AC7 /* Pods-Meal-O.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Meal-O/Pods-Meal-O-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Meal-O/Pods-Meal-O.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		86C3F589C6DABA2C4463B4C9DF40BB31 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E409A64289B42E793CD82944EDA8009 /* Pods-Meal-O.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Meal-O/Pods-Meal-O-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Meal-O/Pods-Meal-O.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -466,6 +578,78 @@
 			};
 			name = Debug;
 		};
+		8F3C96F08B4FFC629679CC9C6553B4FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F661FE9D4279A2FB76AF4A57ED5640F /* Turf.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Turf/Turf-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Turf/Turf-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Turf/Turf.modulemap";
+				PRODUCT_MODULE_NAME = Turf;
+				PRODUCT_NAME = Turf;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9A8D0446FFE64388BD9174A212C4FAC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD1A04C63715E23788EA54C1DDDF4168 /* Pods-Meal-O.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Meal-O/Pods-Meal-O-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Meal-O/Pods-Meal-O.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		9E406C6AAF85E580207CD97B0044DEAB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -528,6 +712,80 @@
 			};
 			name = Release;
 		};
+		C612246A9E3250D7C84058F61C8F3176 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 846B14A721A8F70276DB3F17BCC801D6 /* Turf.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Turf/Turf-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Turf/Turf-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Turf/Turf.modulemap";
+				PRODUCT_MODULE_NAME = Turf;
+				PRODUCT_NAME = Turf;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E91E8E166F8BEB04F30B001AF53029A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83BEC4739C3600E1EDCFF61E56DA131B /* Pods-Meal-O.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Meal-O/Pods-Meal-O-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Meal-O/Pods-Meal-O.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -549,11 +807,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A1680A0B80544196B3B19A6529A29F04 /* Build configuration list for PBXNativeTarget "Pods-Meal-O" */ = {
+		58888AE8E3210987B6D6809CD00205F9 /* Build configuration list for PBXNativeTarget "Pods-Meal-O" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6BCCBA4ED9B2C8245AEA8A260EE24971 /* Debug */,
-				86C3F589C6DABA2C4463B4C9DF40BB31 /* Release */,
+				9A8D0446FFE64388BD9174A212C4FAC1 /* Debug */,
+				E91E8E166F8BEB04F30B001AF53029A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F7A6CBEC48D446D292DE4454EBFCF263 /* Build configuration list for PBXNativeTarget "Turf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F3C96F08B4FFC629679CC9C6553B4FF /* Debug */,
+				C612246A9E3250D7C84058F61C8F3176 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

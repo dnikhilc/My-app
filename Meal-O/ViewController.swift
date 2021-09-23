@@ -7,6 +7,8 @@
 
 import UIKit
 import GoogleMaps
+import MapKit
+import Turf
 
 
 class CellRestaurant: UICollectionViewCell {
@@ -23,6 +25,7 @@ class ViewController: UIViewController {
     
     var mapView: GMSMapView!
     var arraySelectedRestaurant = [Restaurant]()
+    var locationManager = CLLocationManager()
     
     
     override func viewDidLoad() {
@@ -37,6 +40,10 @@ class ViewController: UIViewController {
         self.mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 160), camera: camera)
         self.mapView.isMyLocationEnabled = true
         self.view.addSubview(self.mapView)
+        
+        //Location Manager code to fetch current location
+        self.locationManager.delegate = self
+        self.locationManager.startUpdatingLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +58,21 @@ class ViewController: UIViewController {
     }
 
 
+}
+
+
+// MARK: - Location Manager Delegates
+extension ViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last
+        
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 16.0)
+        
+        self.mapView?.animate(to: camera)
+        
+        //Finally stop updating location otherwise it will come again and again in this delegate
+        self.locationManager.stopUpdatingLocation()
+    }
 }
 
 
@@ -117,7 +139,13 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         self.collectionViewRestaurant.reloadItems(at: [indexPath])
         
         // Load selected restaurant on the MAP
-        self.loadSelectedRestaurantOnMap()
+        if self.arraySelectedRestaurant.count > 0 {
+            self.loadSelectedRestaurantOnMap()
+        } else {
+            // Clear Polyline, Marker, etc.
+            self.mapView.clear()
+        }
+        
     }
     
 }
@@ -147,6 +175,226 @@ extension ViewController {
         
         let update = GMSCameraUpdate.fit(bounds, withPadding: 100)
         self.mapView.animate(with: update)
+        
+        // Pass Coordinates to draw path
+        let fromCoordinates = CLLocationCoordinate2D(latitude: 23.0254946, longitude: 72.5103725)
+        let toCoordinates = CLLocationCoordinate2D(latitude: self.arraySelectedRestaurant.first?.latitude ?? 0.0, longitude: self.arraySelectedRestaurant.first?.longitude ?? 0.0)
+//        self.getRoute(from: fromCoordinates, to: toCoordinates)
+        self.fetchRoute(from: fromCoordinates, to: toCoordinates)
+        
+//        self.drawRectangle(from: fromCoordinates, to: toCoordinates)
+    }
+    
+}
+
+
+// MARK: - Draw Route with MAPKIT
+extension ViewController {
+    
+    func fetchRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) {
+        
+        let session = URLSession.shared
+        
+        let urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=false&mode=driving&key=AIzaSyD2acd7GIfeeUgUYdswlfI1umkKrPNxu_o"
+                
+        let url = URL(string: urlString)
+        
+        let task = session.dataTask(with: url!, completionHandler: {
+            (data, response, error) in
+            
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            guard let jsonResponse = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else {
+                print("error in JSONSerialization")
+                return
+            }
+            
+            guard let routes = jsonResponse["routes"] as? [Any] else {
+                return
+            }
+            
+            guard let route = routes[0] as? [String: Any] else {
+                return
+            }
+            
+            guard let legs = route["legs"] as? [Any] else {
+                return
+            }
+            
+            guard let legsFirst = legs[0] as? [String: Any] else {
+                return
+            }
+            
+            guard let steps = legsFirst["steps"] as? [Any] else {
+                return
+            }
+            print(steps)
+
+            guard let overview_polyline = route["overview_polyline"] as? [String: Any] else {
+                return
+            }
+            
+            guard let polyLineString = overview_polyline["points"] as? String else {
+                return
+            }
+            
+            //Call this method to draw path on map
+            DispatchQueue.main.async {
+                self.drawPath(from: polyLineString, arraySteps: steps)
+            }
+            
+        })
+        task.resume()
+    }
+    
+    // Draw Rectangle
+    func drawRectangle(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) {
+        // Create a rectangular path
+        let rect = GMSMutablePath()
+//        rect.add(CLLocationCoordinate2D(latitude: 23.0254946, longitude: 72.5103725))
+//        rect.add(CLLocationCoordinate2D(latitude: 23.0174946, longitude: 72.5103725))
+//        rect.add(CLLocationCoordinate2D(latitude: 23.0174946, longitude: 72.4903725))
+//        rect.add(CLLocationCoordinate2D(latitude: 23.0254946, longitude: 72.4903725))
+        
+        rect.add(source)
+        rect.add(CLLocationCoordinate2D(latitude: destination.latitude, longitude: source.longitude))
+        rect.add(CLLocationCoordinate2D(latitude: destination.latitude, longitude: destination.longitude))
+        rect.add(CLLocationCoordinate2D(latitude: source.latitude, longitude: destination.longitude))
+        rect.add(source)
+                
+        // Create the polygon, and assign it to the map.
+        let polygon = GMSPolygon(path: rect)
+        polygon.fillColor = UIColor(red: 0.25, green: 0, blue: 0, alpha: 0.05);
+        polygon.strokeColor = UIColor.init(hue: 210, saturation: 88, brightness: 84, alpha: 1)
+        polygon.strokeWidth = 2
+        polygon.map = mapView
+        
+        
+        // Check Dakshinyan is inside the rectangle
+        Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false) { (timer) in
+            // Get Dakshinyan Latitude and Longitude
+            let dakshinyan = CLLocationCoordinate2D(latitude: 23.0254699, longitude: 72.5100133)
+            if self.checkResturantInsidePolygon(WithPath: rect, restaurantCoorfinates: dakshinyan) {
+                print("Y : Dakshinyan restaurant is inside the rectangle")
+            } else {
+                print("X : Dakshinyan restaurant is NOT inside the rectangle")
+            }
+            
+        }
+    }
+    
+    func drawPath(from polyStr: String, arraySteps: [Any]) {
+        let path = GMSPath(fromEncodedPath: polyStr)
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeWidth = 7.0
+        polyline.strokeColor = #colorLiteral(red: 0, green: 0.5628422499, blue: 0.3188166618, alpha: 1)
+        polyline.map = mapView // Google MapView
+        
+        
+        // Create the polygon, and assign it to the map.
+//        let polygon = GMSPolygon(path: path)
+//        polygon.fillColor = UIColor(red: 0.25, green: 0, blue: 0, alpha: 0.05);
+//        polygon.strokeColor = .black
+//        polygon.strokeWidth = 2
+//        polygon.map = mapView
+        
+        
+        var arrayStepsOfCoordinates = [CLLocationCoordinate2D]()
+        for item in arraySteps {
+            if let dict = item as? [String: Any] {
+                if let startLocation = dict["start_location"] as? [String: Any] {
+                    
+                    let latitude = startLocation["lat"] as? Double ?? 0.0
+                    let longitude = startLocation["lng"] as? Double ?? 0.0
+                    
+                    print(latitude)
+                    print(longitude)
+                    
+                    let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    arrayStepsOfCoordinates.append(coordinate)
+                }
+            }
+        }
+        
+        let line = LineString(arrayStepsOfCoordinates)
+        
+//        let snapped = line.closestCoordinate(to: CLLocationCoordinate2D(latitude: 23.0243068, longitude: 72.5073994))
+//        let snapped = line.closestCoordinate(to: CLLocationCoordinate2D(latitude: 23.0294643, longitude: 72.5114502))
+        let snapped = line.closestCoordinate(to: CLLocationCoordinate2D(latitude: 23.02771, longitude: 72.5068811))
+        
+        print(snapped?.distance)
+        print(snapped?.coordinate)
+        
+    }
+    
+    // MARK: - Check Resturant lies inside Polygon
+    func checkResturantInsidePolygon(WithPath polygonPath: GMSPath, restaurantCoorfinates: CLLocationCoordinate2D) -> Bool {
+        if GMSGeometryContainsLocation(restaurantCoorfinates, GMSPath(path: polygonPath), true) {
+            print("Restaurant is inside polygon")
+            return true
+        } else {
+            print("Restaurant is NOT inside polygon")
+            return false
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func getRoute(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D) {
+        
+        let source = MKMapItem(placemark: MKPlacemark(coordinate: from))
+        let destination = MKMapItem(placemark: MKPlacemark(coordinate: to))
+
+        let request = MKDirections.Request()
+        request.source = source
+        request.destination = destination
+        request.requestsAlternateRoutes = false
+
+        let directions = MKDirections(request: request)
+
+        directions.calculate(completionHandler: { (response, error) in
+            if let res = response {
+                //the function to convert the result and show
+                self.show(polyline: self.googlePolylines(from: res))
+            }
+        })
+    }
+    
+    private func googlePolylines(from response: MKDirections.Response) -> GMSPolyline {
+
+        let route = response.routes[0]
+        var coordinates = [CLLocationCoordinate2D](
+            repeating: kCLLocationCoordinate2DInvalid,
+            count: route.polyline.pointCount)
+
+        route.polyline.getCoordinates(
+            &coordinates,
+            range: NSRange(location: 0, length: route.polyline.pointCount))
+
+        let polyline = Polyline(coordinates: coordinates)
+        let encodedPolyline: String = polyline.encodedPolyline
+        let path = GMSPath(fromEncodedPath: encodedPolyline)
+        return GMSPolyline(path: path)
+        
+    }
+    
+    func show(polyline: GMSPolyline) {
+
+        //add style to polyline
+        polyline.strokeColor = UIColor.red
+        polyline.strokeWidth = 3
+        
+        //add to map
+        polyline.map = mapView
     }
     
 }

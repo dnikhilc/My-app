@@ -14,6 +14,7 @@
 		0E3A94D626A838FB00C3DF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E3A94D526A838FB00C3DF62 /* Assets.xcassets */; };
 		0E3A94D926A838FB00C3DF62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E3A94D726A838FB00C3DF62 /* LaunchScreen.storyboard */; };
 		0E9BC22A26A9854B00A405FB /* RestaurantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9BC22926A9854B00A405FB /* RestaurantModel.swift */; };
+		0ED075CB26C80F9D00161834 /* Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED075CA26C80F9D00161834 /* Polyline.swift */; };
 		DCFD0EE99993B1E80E58C126 /* Pods_Meal_O.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9B5E0E7A757BDA01123C9D /* Pods_Meal_O.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		0E3A94D826A838FB00C3DF62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0E3A94DA26A838FB00C3DF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E9BC22926A9854B00A405FB /* RestaurantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantModel.swift; sourceTree = "<group>"; };
+		0ED075CA26C80F9D00161834 /* Polyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polyline.swift; sourceTree = "<group>"; };
 		6C2703B4091F1156D7C39EE6 /* Pods-Meal-O.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meal-O.release.xcconfig"; path = "Target Support Files/Pods-Meal-O/Pods-Meal-O.release.xcconfig"; sourceTree = "<group>"; };
 		78F5F212858EA7C113C781CF /* Pods-Meal-O.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meal-O.debug.xcconfig"; path = "Target Support Files/Pods-Meal-O/Pods-Meal-O.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 				0E3A94D526A838FB00C3DF62 /* Assets.xcassets */,
 				0E3A94D726A838FB00C3DF62 /* LaunchScreen.storyboard */,
 				0E3A94DA26A838FB00C3DF62 /* Info.plist */,
+				0ED075CA26C80F9D00161834 /* Polyline.swift */,
 			);
 			path = "Meal-O";
 			sourceTree = "<group>";
@@ -106,6 +109,7 @@
 				0E3A94C626A838FB00C3DF62 /* Frameworks */,
 				0E3A94C726A838FB00C3DF62 /* Resources */,
 				12E005CA994C8A3FDBEB19EC /* [CP] Copy Pods Resources */,
+				4F772A160ECD4271293C9A51 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -201,6 +205,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4F772A160ECD4271293C9A51 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Meal-O/Pods-Meal-O-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Meal-O/Pods-Meal-O-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Meal-O/Pods-Meal-O-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -210,6 +231,7 @@
 			files = (
 				0E3A94D126A838FB00C3DF62 /* ViewController.swift in Sources */,
 				0E3A94CD26A838FB00C3DF62 /* AppDelegate.swift in Sources */,
+				0ED075CB26C80F9D00161834 /* Polyline.swift in Sources */,
 				0E9BC22A26A9854B00A405FB /* RestaurantModel.swift in Sources */,
 				0E3A94CF26A838FB00C3DF62 /* SceneDelegate.swift in Sources */,
 			);

@@ -7,5 +7,6 @@ target 'Meal-O' do
 
   # Pods for Meal-O
 pod 'GoogleMaps', '5.1.0'
+pod 'Turf', '~> 1.2'
 
 end

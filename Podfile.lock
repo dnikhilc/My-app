@@ -4,17 +4,21 @@ PODS:
   - GoogleMaps/Base (5.1.0)
   - GoogleMaps/Maps (5.1.0):
     - GoogleMaps/Base
+  - Turf (1.2.0)
 
 DEPENDENCIES:
   - GoogleMaps (= 5.1.0)
+  - Turf (~> 1.2)
 
 SPEC REPOS:
   trunk:
     - GoogleMaps
+    - Turf
 
 SPEC CHECKSUMS:
   GoogleMaps: 086ae1dab659eaa7339bdb30fc88e2f44e7c597c
+  Turf: aaa060138b11a8e979a19e6d81091d156a31bc58
 
-PODFILE CHECKSUM: 782324198c8e57d49de49192f944965a895fa439
+PODFILE CHECKSUM: 0bce24cc0fa8cf42e04f7a48e1afc471c6f60c96
 
 COCOAPODS: 1.10.1
