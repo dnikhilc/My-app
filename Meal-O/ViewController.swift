@@ -27,6 +27,8 @@ class ViewController: UIViewController {
     var arraySelectedRestaurant = [Restaurant]()
     var locationManager = CLLocationManager()
     
+    var latArray = [Double]()
+    var longArray = [Double]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,8 +183,6 @@ extension ViewController {
         let toCoordinates = CLLocationCoordinate2D(latitude: self.arraySelectedRestaurant.first?.latitude ?? 0.0, longitude: self.arraySelectedRestaurant.first?.longitude ?? 0.0)
 //        self.getRoute(from: fromCoordinates, to: toCoordinates)
         self.fetchRoute(from: fromCoordinates, to: toCoordinates)
-        
-//        self.drawRectangle(from: fromCoordinates, to: toCoordinates)
     }
     
 }
@@ -301,23 +301,58 @@ extension ViewController {
 //        polygon.strokeWidth = 2
 //        polygon.map = mapView
         
+        if let dict = arraySteps.first as? [String: Any] {
+            
+            if let startLocation = dict["start_location"] as? [String: Any] {
+                
+                let latitude = startLocation["lat"] as? Double ?? 0.0
+                let longitude = startLocation["lng"] as? Double ?? 0.0
+                
+                latArray.append(latitude)
+                longArray.append(longitude)
+            }
+        }
         
         var arrayStepsOfCoordinates = [CLLocationCoordinate2D]()
         for item in arraySteps {
             if let dict = item as? [String: Any] {
-                if let startLocation = dict["start_location"] as? [String: Any] {
+                if let endLocation = dict["end_location"] as? [String: Any] {
                     
-                    let latitude = startLocation["lat"] as? Double ?? 0.0
-                    let longitude = startLocation["lng"] as? Double ?? 0.0
+                    let latitude = endLocation["lat"] as? Double ?? 0.0
+                    let longitude = endLocation["lng"] as? Double ?? 0.0
+                    
+                    latArray.append(latitude)
+                    longArray.append(longitude)
                     
                     print(latitude)
                     print(longitude)
+
                     
                     let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                     arrayStepsOfCoordinates.append(coordinate)
                 }
             }
         }
+        
+        
+        print(latArray) // Horizontal points
+        print(longArray) // vertical points
+        
+        let maxxCoordinate = latArray.max() ?? 0.0
+        let minxCoordinate = latArray.min() ?? 0.0
+        let maxyCoordinate = longArray.max() ?? 0.0
+        let minyCoordinate = longArray.min() ?? 0.0
+        
+        print(maxxCoordinate as Any)
+        print(minyCoordinate as Any)
+        
+        print(minxCoordinate as Any)
+        print(maxyCoordinate as Any)
+        
+        let fromCoordinates = CLLocationCoordinate2D(latitude: minxCoordinate - 0.0201, longitude: maxyCoordinate + 0.016)
+        let toCoordinates = CLLocationCoordinate2D(latitude: maxxCoordinate + 0.0201, longitude: minyCoordinate - 0.016)
+        
+        self.drawRectangle(from: fromCoordinates, to: toCoordinates)
         
         let line = LineString(arrayStepsOfCoordinates)
         
