@@ -9,6 +9,11 @@ import UIKit
 import GoogleMaps
 import MapKit
 import Turf
+import CoreLocation
+import SVProgressHUD
+import Alamofire
+import SwiftyJSON
+import SDWebImage
 
 
 class CellRestaurant: UICollectionViewCell {
@@ -29,6 +34,18 @@ class ViewController: UIViewController {
     
     var latArray = [Double]()
     var longArray = [Double]()
+    
+    var currentLatitude = 0.0
+    var currentLongitude = 0.0
+    
+    let GOOGLE_SEARCH_TYPE = "restaurant"
+    let GOOGLE_SEARCH_RANKED_BY = "distance"
+    let GOOGLE_API_KEY = "AIzaSyD2acd7GIfeeUgUYdswlfI1umkKrPNxu_o"
+    
+    var googleRestaurantInfo: GoogleResturant!
+    var arrayNearbyRestaurant = [Restaurants]()
+    var selectedNearbyRestaurant = [Restaurants]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +91,29 @@ extension ViewController: CLLocationManagerDelegate {
         
         //Finally stop updating location otherwise it will come again and again in this delegate
         self.locationManager.stopUpdatingLocation()
+        
+        
+        if let location = locations.last {
+            print("Current Location")
+            print("Latitude: \(location.coordinate.latitude)")
+            print("Longitude: \(location.coordinate.longitude)")
+                        
+            // Stop Updating Location
+            self.locationManager.stopUpdatingLocation()
+            
+            // Get Nearby Restaurants
+            // Check Lat and Long, if it is SAME then do not this method from here
+            if self.currentLatitude != location.coordinate.latitude && self.currentLongitude != location.coordinate.longitude {
+                
+                // Get Current Location
+                self.currentLatitude = location.coordinate.latitude
+                self.currentLongitude = location.coordinate.longitude
+                
+                // Call Method
+                self.getNearByRestaurants()
+            }
+            
+        }
     }
 }
 
@@ -86,6 +126,9 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.arrayNearbyRestaurant.count > 0 {
+            return self.arrayNearbyRestaurant.count
+        }
         return arrayRestaurant.count
     }
     
@@ -96,24 +139,64 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellRestaurant", for: indexPath) as! CellRestaurant
         
-        // Get Model
-        let restaurant = arrayRestaurant[indexPath.row]
         
-        // Set Data
-        cell.imageViewRestaurant.image = UIImage(named: restaurant.image)
-        cell.lblRestaurantName.text = restaurant.name
-        
-        // Highlight cell if selected
-        if self.arraySelectedRestaurant.contains(where: { (selectedRestaurant) -> Bool in
-            selectedRestaurant.id == restaurant.id
-        }) {
-            // Exist
-            cell.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
-            cell.lblRestaurantName.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        if self.arrayNearbyRestaurant.count > 0 {
+            // Get Model
+            let restaurant = self.arrayNearbyRestaurant[indexPath.row]
+            
+            // Set Data
+            cell.lblRestaurantName.text = restaurant.name
+            
+            // Get Image
+            if let photoRef = restaurant.photos?.first?.photoReference {
+                let width = Int(UIScreen.main.bounds.width)
+                let strImageURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=\(width)&photoreference=\(photoRef)&key=\(GOOGLE_API_KEY)"
+                let urlImage = URL(string: strImageURL)
+                cell.imageViewRestaurant.sd_setImage(with: urlImage, placeholderImage: UIImage(named: "food"))
+            
+            }else {
+                cell.imageViewRestaurant.image = UIImage(named: "food")
+            }
+            
+            // Highlight cell if selected
+            if self.selectedNearbyRestaurant.contains(where: { (selectedRestaurant) -> Bool in
+                selectedRestaurant.placeID == restaurant.placeID
+            }) {
+                // Exist
+                cell.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+                cell.lblRestaurantName.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            } else {
+                // Not Exist
+                cell.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                cell.lblRestaurantName.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            }
+            
+            if self.arrayNearbyRestaurant.count - 1 == indexPath.row {
+                // self.getFoods()
+                self.getNearByRestaurants()
+            }
+            
         } else {
-            // Not Exist
-            cell.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            cell.lblRestaurantName.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            
+            // Get Model
+            let restaurant = arrayRestaurant[indexPath.row]
+            
+            // Set Data
+            cell.imageViewRestaurant.image = UIImage(named: restaurant.image)
+            cell.lblRestaurantName.text = restaurant.name
+            
+            // Highlight cell if selected
+            if self.arraySelectedRestaurant.contains(where: { (selectedRestaurant) -> Bool in
+                selectedRestaurant.id == restaurant.id
+            }) {
+                // Exist
+                cell.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+                cell.lblRestaurantName.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            } else {
+                // Not Exist
+                cell.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                cell.lblRestaurantName.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            }
         }
         
         // UIImageView Properties
@@ -125,27 +208,53 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // If restaurant is not added then add it to array otherwise remove it from array
-        let index = self.arraySelectedRestaurant.firstIndex { (restaurant) -> Bool in
-            restaurant.id == arrayRestaurant[indexPath.row].id
-        } ?? nil
-        
-        if index == nil {
-            // Add to array
-            self.arraySelectedRestaurant.append(arrayRestaurant[indexPath.row])
+        if self.arrayNearbyRestaurant.count > 0 {
+            let index = self.selectedNearbyRestaurant.firstIndex { (restaurant) -> Bool in
+                restaurant.placeID == self.arrayNearbyRestaurant[indexPath.row].placeID
+            } ?? nil
+            
+            if index == nil {
+                // Add to array
+                self.selectedNearbyRestaurant.append(arrayNearbyRestaurant[indexPath.row])
+            } else {
+                // Remove from Array
+                self.selectedNearbyRestaurant.remove(at: index ?? 0)
+            }
+            
+            // Refresh CollectionView to Highlight selected cell
+            self.collectionViewRestaurant.reloadItems(at: [indexPath])
+            
+            // Load selected restaurant on the MAP
+            if self.selectedNearbyRestaurant.count > 0 {
+                self.loadSelectedRestaurantOnMap()
+            } else {
+                // Clear Polyline, Marker, etc.
+                self.mapView.clear()
+            }
+            
         } else {
-            // Remove from Array
-            self.arraySelectedRestaurant.remove(at: index ?? 0)
-        }
-        
-        // Refresh CollectionView to Highlight selected cell
-        self.collectionViewRestaurant.reloadItems(at: [indexPath])
-        
-        // Load selected restaurant on the MAP
-        if self.arraySelectedRestaurant.count > 0 {
-            self.loadSelectedRestaurantOnMap()
-        } else {
-            // Clear Polyline, Marker, etc.
-            self.mapView.clear()
+            let index = self.arraySelectedRestaurant.firstIndex { (restaurant) -> Bool in
+                restaurant.id == arrayRestaurant[indexPath.row].id
+            } ?? nil
+            
+            if index == nil {
+                // Add to array
+                self.arraySelectedRestaurant.append(arrayRestaurant[indexPath.row])
+            } else {
+                // Remove from Array
+                self.arraySelectedRestaurant.remove(at: index ?? 0)
+            }
+            
+            // Refresh CollectionView to Highlight selected cell
+            self.collectionViewRestaurant.reloadItems(at: [indexPath])
+            
+            // Load selected restaurant on the MAP
+            if self.arraySelectedRestaurant.count > 0 {
+                self.loadSelectedRestaurantOnMap()
+            } else {
+                // Clear Polyline, Marker, etc.
+                self.mapView.clear()
+            }
         }
         
     }
@@ -164,25 +273,55 @@ extension ViewController {
         // bounds will be use to show all selected Markers
         var bounds = GMSCoordinateBounds()
         
-        for restaurant in self.arraySelectedRestaurant {
-            // Create Marker
-            let position = CLLocationCoordinate2D(latitude: restaurant.latitude, longitude: restaurant.longitude)
-            let marker = GMSMarker(position: position)
-            marker.title = restaurant.name
-            marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1))
-            marker.map = mapView
+        if self.arrayNearbyRestaurant.count > 0 {
+            for restaurant in self.selectedNearbyRestaurant {
+                // Create Marker
+                let latitude = restaurant.geometry?.location?.lat ?? 0.0
+                let longitude = restaurant.geometry?.location?.lng ?? 0.0
+                let position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                let marker = GMSMarker(position: position)
+                marker.title = restaurant.name
+                marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1))
+                marker.map = mapView
+                
+                bounds = bounds.includingCoordinate(marker.position)
+            }
             
-            bounds = bounds.includingCoordinate(marker.position)
+            let update = GMSCameraUpdate.fit(bounds, withPadding: 100)
+            self.mapView.animate(with: update)
+            
+            // Pass Coordinates to draw path
+            let fromCoordinates = CLLocationCoordinate2D(latitude: 23.0254946, longitude: 72.5103725)
+            
+            let latitude = self.selectedNearbyRestaurant.first?.geometry?.location?.lat ?? 0.0
+            let longitude = self.selectedNearbyRestaurant.first?.geometry?.location?.lng ?? 0.0
+            
+            let toCoordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            //        self.getRoute(from: fromCoordinates, to: toCoordinates)
+            self.fetchRoute(from: fromCoordinates, to: toCoordinates)
+            
+        } else {
+            
+            for restaurant in self.arraySelectedRestaurant {
+                // Create Marker
+                let position = CLLocationCoordinate2D(latitude: restaurant.latitude, longitude: restaurant.longitude)
+                let marker = GMSMarker(position: position)
+                marker.title = restaurant.name
+                marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1))
+                marker.map = mapView
+                
+                bounds = bounds.includingCoordinate(marker.position)
+            }
+            
+            let update = GMSCameraUpdate.fit(bounds, withPadding: 100)
+            self.mapView.animate(with: update)
+            
+            // Pass Coordinates to draw path
+            let fromCoordinates = CLLocationCoordinate2D(latitude: 23.0254946, longitude: 72.5103725)
+            let toCoordinates = CLLocationCoordinate2D(latitude: self.arraySelectedRestaurant.first?.latitude ?? 0.0, longitude: self.arraySelectedRestaurant.first?.longitude ?? 0.0)
+            //        self.getRoute(from: fromCoordinates, to: toCoordinates)
+            self.fetchRoute(from: fromCoordinates, to: toCoordinates)
         }
-        
-        let update = GMSCameraUpdate.fit(bounds, withPadding: 100)
-        self.mapView.animate(with: update)
-        
-        // Pass Coordinates to draw path
-        let fromCoordinates = CLLocationCoordinate2D(latitude: 23.0254946, longitude: 72.5103725)
-        let toCoordinates = CLLocationCoordinate2D(latitude: self.arraySelectedRestaurant.first?.latitude ?? 0.0, longitude: self.arraySelectedRestaurant.first?.longitude ?? 0.0)
-//        self.getRoute(from: fromCoordinates, to: toCoordinates)
-        self.fetchRoute(from: fromCoordinates, to: toCoordinates)
     }
     
 }
@@ -433,3 +572,79 @@ extension ViewController {
     }
     
 }
+
+
+// MARK: - Google APIs
+extension ViewController {
+    
+    // MARK: - Nearby Restaurants
+    func getNearByRestaurants() -> Void {
+        
+        // Start Loading
+        DispatchQueue.main.async {
+            SVProgressHUD.show()
+        }
+        
+        //Get URL
+        var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(self.currentLatitude),\(self.currentLongitude)&rankby=\(GOOGLE_SEARCH_RANKED_BY)&type=\(GOOGLE_SEARCH_TYPE)&key=\(GOOGLE_API_KEY)&opennow"
+        
+        // Check if we have PAGE TOKEN or not
+        if self.googleRestaurantInfo != nil {
+            url = url + "&pagetoken=\(self.googleRestaurantInfo.nextPageToken ?? "")"
+        }
+        
+//        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&rankby=distance&type=restaurant&key=AIzaSyD2acd7GIfeeUgUYdswlfI1umkKrPNxu_o&opennow"
+        
+        
+        //Call API to get data
+        AF.request(url, parameters: [:])
+            .validate()
+            .responseDecodable(of: GoogleResturant.self) { response in
+                
+                //Stop Activity Indicator
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                }
+                
+                //Check if there is DATA available then only proceed ahead
+                guard let restaurantData = response.value else {
+                    print("Error: ", response.error?.localizedDescription as Any)
+                    return
+                }
+                
+                //Set response Data
+                self.googleRestaurantInfo = restaurantData
+                
+                // Check and append restaurants
+                if self.arrayNearbyRestaurant.count <= 0 {
+                    self.arrayNearbyRestaurant = self.googleRestaurantInfo.results ?? []
+                }else {
+                    self.arrayNearbyRestaurant.append(contentsOf: self.googleRestaurantInfo.results ?? [])
+                }
+                print("Total Restaurants: \(self.arrayNearbyRestaurant.count)")
+                
+                
+                //Check if there is any data or not
+                if (self.arrayNearbyRestaurant.count <= 0) {
+                    //No Data
+                    print("No Data")
+                    
+                }else {
+                    
+                    // Reload Data
+                    self.collectionViewRestaurant.reloadData()
+                }
+        }
+            // Print Response String
+            .responseString { (responce) in
+                print("---------------------------------Response--------------------------------------")
+                print("URL : ",url)
+                print("PARAM : ",[])
+                print("RESPONCE :- ",JSON(responce.value ?? ""))
+                print("RESPONCE CODE :- ",responce.response?.statusCode ?? "")
+                print("------------------------------------------------------------------------------")
+        }
+    }
+    
+}
+
