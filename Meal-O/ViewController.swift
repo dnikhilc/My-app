@@ -55,10 +55,11 @@ class ViewController: UIViewController {
         self.title = "Restaurants"
         
         // Google Map View
-        let camera = GMSCameraPosition.camera(withLatitude: 23.0254946, longitude: 72.5103725, zoom: 16.0)
+        let camera = GMSCameraPosition.camera(withLatitude: self.currentLatitude, longitude: self.currentLongitude, zoom: 16.0)
         self.mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 160), camera: camera)
         self.mapView.isMyLocationEnabled = true
         self.view.addSubview(self.mapView)
+        
         
         //Location Manager code to fetch current location
         self.locationManager.delegate = self
@@ -108,6 +109,11 @@ extension ViewController: CLLocationManagerDelegate {
                 // Get Current Location
                 self.currentLatitude = location.coordinate.latitude
                 self.currentLongitude = location.coordinate.longitude
+                
+                // Google Map View
+                let camera = GMSCameraPosition.camera(withLatitude: self.currentLatitude, longitude: self.currentLongitude, zoom: 16.0)
+                self.mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 160), camera: camera)
+                self.mapView.isMyLocationEnabled = true
                 
                 // Call Method
                 self.getNearByRestaurants()
