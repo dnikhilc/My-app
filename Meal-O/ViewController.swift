@@ -54,15 +54,9 @@ class ViewController: UIViewController {
         // Navigation Bar Title
         self.title = "Restaurants"
         
-        // Google Map View
-        let camera = GMSCameraPosition.camera(withLatitude: self.currentLatitude, longitude: self.currentLongitude, zoom: 16.0)
-        self.mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 160), camera: camera)
-        self.mapView.isMyLocationEnabled = true
-        self.view.addSubview(self.mapView)
-        
-        
         //Location Manager code to fetch current location
         self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
     }
     
@@ -114,12 +108,17 @@ extension ViewController: CLLocationManagerDelegate {
                 let camera = GMSCameraPosition.camera(withLatitude: self.currentLatitude, longitude: self.currentLongitude, zoom: 16.0)
                 self.mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 160), camera: camera)
                 self.mapView.isMyLocationEnabled = true
+                self.view.addSubview(self.mapView)
                 
                 // Call Method
                 self.getNearByRestaurants()
             }
             
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location Error: \(error.localizedDescription)")
     }
 }
 
@@ -297,7 +296,7 @@ extension ViewController {
             self.mapView.animate(with: update)
             
             // Pass Coordinates to draw path
-            let fromCoordinates = CLLocationCoordinate2D(latitude: 23.0254946, longitude: 72.5103725)
+            let fromCoordinates = CLLocationCoordinate2D(latitude: self.currentLatitude, longitude: self.currentLongitude)
             
             let latitude = self.selectedNearbyRestaurant.first?.geometry?.location?.lat ?? 0.0
             let longitude = self.selectedNearbyRestaurant.first?.geometry?.location?.lng ?? 0.0
