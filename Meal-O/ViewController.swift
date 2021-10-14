@@ -41,6 +41,7 @@ class ViewController: UIViewController {
     
     var currentLatitude = 0.0
     var currentLongitude = 0.0
+    var radius = 5000
     
     let GOOGLE_SEARCH_TYPE = "restaurant"
     let GOOGLE_SEARCH_RANKED_BY = "distance"
@@ -254,6 +255,21 @@ extension ViewController {
         self.fetchRoute(from: fromCoordinates, to: toCoordinates)
     }
     
+    
+    // MARK: - Add Multiple Markers on Map
+    func addMultipleMarkers(_ markers: [Restaurants]) -> Void {
+        for restaurant in markers {
+            // Create Marker
+            let latitude = restaurant.geometry?.location?.lat ?? 0.0
+            let longitude = restaurant.geometry?.location?.lng ?? 0.0
+            let position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let marker = GMSMarker(position: position)
+            marker.title = restaurant.name
+            marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1))
+            marker.map = mapView
+        }
+    }
+    
 }
 
 
@@ -329,12 +345,6 @@ extension ViewController {
         rect.add(CLLocationCoordinate2D(latitude: destination.latitude, longitude: destination.longitude))
         rect.add(CLLocationCoordinate2D(latitude: source.latitude, longitude: destination.longitude))
         rect.add(source)
-        
-        print("South West")
-        print(source.latitude + destination.longitude)
-        
-        print("North East")
-        print(destination.latitude + source.longitude)
                 
         // Create the polygon, and assign it to the map.
         let polygon = GMSPolygon(path: rect)
@@ -344,17 +354,37 @@ extension ViewController {
         polygon.map = mapView
         
         
-        // Check Dakshinyan is inside the rectangle
-        Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false) { (timer) in
-            // Get Dakshinyan Latitude and Longitude
-            let dakshinyan = CLLocationCoordinate2D(latitude: 23.0254699, longitude: 72.5100133)
-            if self.checkResturantInsidePolygon(WithPath: rect, restaurantCoorfinates: dakshinyan) {
-                print("Y : Dakshinyan restaurant is inside the rectangle")
-            } else {
-                print("X : Dakshinyan restaurant is NOT inside the rectangle")
-            }
-            
-        }
+        print("South West: \(source.latitude), \(destination.longitude)")
+        let southWest = CLLocation(latitude: source.latitude, longitude: destination.longitude)
+        
+        print("North East: \(destination.latitude), \(source.longitude)")
+        let northEast = CLLocation(latitude: destination.latitude, longitude: source.longitude)
+        
+        // Get Center Point of RECT
+        let centerX = (source.latitude + destination.latitude) / 2
+        let centerY = (source.longitude + destination.longitude) / 2
+        print("Center Point: \(centerX), \(centerY)")
+        let centerPoint = CLLocation(latitude: centerX, longitude: centerY)
+        
+        // Distance
+        let distanceSouthWest = southWest.distance(from: centerPoint)
+        print("Center distance from South West: \(distanceSouthWest) meters")
+        
+        let distanceNorthEast = northEast.distance(from: centerPoint)
+        print("Center distance from North East: \(distanceNorthEast) meters")
+        
+        // First clear previous data from Array
+        self.arrayNearbyRestaurant.removeAll()
+        self.googleRestaurantInfo = nil
+        self.collectionViewRestaurant.reloadData()
+        
+        // Setting Center Point to Current Location to get data
+        self.currentLatitude = centerX
+        self.currentLongitude = centerY
+                
+        // Call Google API to get restaurant in Rect w.r.t. Center Point
+        self.radius = Int(distanceSouthWest)
+        self.getNearByRestaurants()
     }
     
     func drawPath(from polyStr: String, arraySteps: [Any]) {
@@ -450,14 +480,28 @@ extension ViewController {
         }
         
         //Get URL
-        var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(self.currentLatitude),\(self.currentLongitude)&rankby=\(GOOGLE_SEARCH_RANKED_BY)&type=\(GOOGLE_SEARCH_TYPE)&key=\(GOOGLE_API_KEY)&opennow"
+//        var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(self.currentLatitude),\(self.currentLongitude)&rankby=\(GOOGLE_SEARCH_RANKED_BY)&type=\(GOOGLE_SEARCH_TYPE)&key=\(GOOGLE_API_KEY)&opennow"
+        
+        // RankBy is not working with Radius
+        var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(self.currentLatitude),\(self.currentLongitude)&type=\(GOOGLE_SEARCH_TYPE)&key=\(GOOGLE_API_KEY)&opennow&radius=\(self.radius)"
+        
         
         // Check if we have PAGE TOKEN or not
         if self.googleRestaurantInfo != nil {
+            // If No more data available, no need to call Google API
+            if self.arrayNearbyRestaurant.count > 0 && (self.googleRestaurantInfo.nextPageToken == "" || self.googleRestaurantInfo.nextPageToken == nil) {
+                //Stop Activity Indicator
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                }
+                
+                return
+            }
+            
             url = url + "&pagetoken=\(self.googleRestaurantInfo.nextPageToken ?? "")"
         }
         
-//        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&rankby=distance&type=restaurant&key=AIzaSyD2acd7GIfeeUgUYdswlfI1umkKrPNxu_o&opennow"
+        //        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&rankby=distance&type=restaurant&key=AIzaSyD2acd7GIfeeUgUYdswlfI1umkKrPNxu_o&opennow"
         
         
         //Call API to get data
@@ -472,12 +516,18 @@ extension ViewController {
                 
                 //Check if there is DATA available then only proceed ahead
                 guard let restaurantData = response.value else {
+                    // Reload Data
+                    self.collectionViewRestaurant.reloadData()
+                    
                     print("Error: ", response.error?.localizedDescription as Any)
                     return
                 }
                 
                 //Set response Data
                 self.googleRestaurantInfo = restaurantData
+                
+                // Add Markers on Map
+                self.addMultipleMarkers(restaurantData.results ?? [])
                 
                 // Check and append restaurants
                 if self.arrayNearbyRestaurant.count <= 0 {
@@ -494,11 +544,11 @@ extension ViewController {
                     print("No Data")
                     
                 }else {
-                    
-                    // Reload Data
-                    self.collectionViewRestaurant.reloadData()
                 }
-        }
+                
+                // Reload Data
+                self.collectionViewRestaurant.reloadData()
+            }
             // Print Response String
             .responseString { (responce) in
                 print("---------------------------------Response--------------------------------------")
@@ -507,11 +557,7 @@ extension ViewController {
                 print("RESPONCE :- ",JSON(responce.value ?? ""))
                 print("RESPONCE CODE :- ",responce.response?.statusCode ?? "")
                 print("------------------------------------------------------------------------------")
-        }
+            }
     }
-    
-    
-    // MARK: - Get Resturants in
-    
 }
 
