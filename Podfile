@@ -8,5 +8,10 @@ target 'Meal-O' do
   # Pods for Meal-O
 pod 'GoogleMaps', '5.1.0'
 pod 'Turf', '~> 1.2'
+pod 'Alamofire', '~> 5.2'
+pod 'SwiftyJSON', '~> 4.0'
+pod 'SDWebImage'
+pod 'SVProgressHUD'
+
 
 end

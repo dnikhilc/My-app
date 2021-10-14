@@ -11,13 +11,17 @@ import GoogleMaps
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         // Google Map Services
         GMSServices.provideAPIKey("AIzaSyD2acd7GIfeeUgUYdswlfI1umkKrPNxu_o")
+        
+        
+        // To adjust Window property for SVProgressHUD
+        window = UIWindow(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         
         return true
     }
