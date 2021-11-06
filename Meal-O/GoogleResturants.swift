@@ -9,92 +9,120 @@ import Foundation
 
 // MARK: - Welcome
 struct GoogleResturant: Codable {
-    let nextPageToken: String?
-    let results: [Restaurants]?
-    let status: String?
+    let totalResults, page, totalPages: Int?
+    let morePages: Bool?
+    let data: [Restaurants]?
+    let numResults: Int?
 
     enum CodingKeys: String, CodingKey {
-        case nextPageToken = "next_page_token"
-        case results, status
+        case totalResults, page
+        case totalPages = "total_pages"
+        case morePages = "more_pages"
+        case data, numResults
     }
 }
 
-// MARK: - Result
+// MARK: - Datum
 struct Restaurants: Codable {
-    let businessStatus: String?
-    var geometry: Geometry?
-    let icon: String?
-    let name: String?
-    let openingHours: OpeningHours?
-    let photos: [Photo]?
-    let placeID: String?
-    let plusCode: PlusCode?
-    let priceLevel: Int?
-    let rating: Double?
-    let reference: String?
-    let scope: String?
-    let types: [String]?
-    let userRatingsTotal: Int?
-    let vicinity: String?
+    let restaurantName, restaurantPhone: String?
+    let restaurantWebsite: String?
+    let hours: String?
+    let priceRange: String?
+    let priceRangeNum: Int?
+    let restaurantID: Double?
+    let cuisines: [String]?
+    let address: Address?
+    let geo: Geo?
+    let menus: [Menu]?
+    let lastUpdated: String?
 
     enum CodingKeys: String, CodingKey {
-        case businessStatus = "business_status"
-        case geometry, icon, name
-        case openingHours = "opening_hours"
-        case photos
-        case placeID = "place_id"
-        case plusCode = "plus_code"
-        case priceLevel = "price_level"
-        case rating, reference, scope, types
-        case userRatingsTotal = "user_ratings_total"
-        case vicinity
+        case restaurantName = "restaurant_name"
+        case restaurantPhone = "restaurant_phone"
+        case restaurantWebsite = "restaurant_website"
+        case hours
+        case priceRange = "price_range"
+        case priceRangeNum = "price_range_num"
+        case restaurantID = "restaurant_id"
+        case cuisines, address, geo, menus
+        case lastUpdated = "last_updated"
     }
 }
 
-// MARK: - Geometry
-struct Geometry: Codable {
-    var location: Location?
-    let viewport: Viewport?
-}
-
-// MARK: - Location
-struct Location: Codable {
-    var lat, lng: Double?
-}
-
-// MARK: - Viewport
-struct Viewport: Codable {
-    let northeast, southwest: Location?
-}
-
-// MARK: - OpeningHours
-struct OpeningHours: Codable {
-    let openNow: Bool?
-
+// MARK: - Address
+struct Address: Codable {
+    let city: String?
+    let state: String?
+    let postalCode, street, formatted: String?
+    
     enum CodingKeys: String, CodingKey {
-        case openNow = "open_now"
+        case city
+        case state
+        case postalCode = "postal_code"
+        case street, formatted
     }
 }
 
-// MARK: - Photo
-struct Photo: Codable {
-    let height: Int?
-    let photoReference: String?
-    let width: Int?
+
+// MARK: - Geo
+struct Geo: Codable {
+    let lat, lon: Double?
+}
+
+// MARK: - Menu
+struct Menu: Codable {
+    let menuName: MenuName?
+    let menuSections: [MenuSection]?
 
     enum CodingKeys: String, CodingKey {
-        case height
-        case photoReference = "photo_reference"
-        case width
+        case menuName = "menu_name"
+        case menuSections = "menu_sections"
     }
 }
 
-// MARK: - PlusCode
-struct PlusCode: Codable {
-    let compoundCode, globalCode: String?
+enum MenuName: String, Codable {
+    case breakfast = "Breakfast"
+    case dinner = "Dinner"
+    case empty = ""
+    case lunch = "Lunch"
+    case main = "Main"
+}
+
+// MARK: - MenuSection
+struct MenuSection: Codable {
+    let sectionName, menuSectionDescription: String?
+    let menuItems: [MenuItem]?
 
     enum CodingKeys: String, CodingKey {
-        case compoundCode = "compound_code"
-        case globalCode = "global_code"
+        case sectionName = "section_name"
+        case menuSectionDescription = "description"
+        case menuItems = "menu_items"
     }
 }
+
+// MARK: - MenuItem
+struct MenuItem: Codable {
+    let name, menuItemDescription: String?
+    let pricing: [Pricing]?
+    let price: Double?
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case menuItemDescription = "description"
+        case pricing, price
+    }
+}
+
+// MARK: - Pricing
+struct Pricing: Codable {
+    let price: Double?
+    let currency: String?
+    let priceString: String?
+}
+
+
+
+
+
+
+
