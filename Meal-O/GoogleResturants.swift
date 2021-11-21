@@ -11,7 +11,7 @@ import Foundation
 struct GoogleResturant: Codable {
     let totalResults, page, totalPages: Int?
     let morePages: Bool?
-    let data: [Restaurants]?
+    var data: [Restaurants]?
     let numResults: Int?
 
     enum CodingKeys: String, CodingKey {
@@ -33,8 +33,11 @@ struct Restaurants: Codable {
     let cuisines: [String]?
     let address: Address?
     let geo: Geo?
-    let menus: [Menu]?
+    var menus: [Menu]?
     let lastUpdated: String?
+    
+    // Local
+    var isAddedInCart: Bool? = false
 
     enum CodingKeys: String, CodingKey {
         case restaurantName = "restaurant_name"
@@ -72,7 +75,7 @@ struct Geo: Codable {
 // MARK: - Menu
 struct Menu: Codable {
     let menuName: MenuName?
-    let menuSections: [MenuSection]?
+    var menuSections: [MenuSection]?
 
     enum CodingKeys: String, CodingKey {
         case menuName = "menu_name"
@@ -91,7 +94,7 @@ enum MenuName: String, Codable {
 // MARK: - MenuSection
 struct MenuSection: Codable {
     let sectionName, menuSectionDescription: String?
-    let menuItems: [MenuItem]?
+    var menuItems: [MenuItem]?
 
     enum CodingKeys: String, CodingKey {
         case sectionName = "section_name"
@@ -105,6 +108,9 @@ struct MenuItem: Codable {
     let name, menuItemDescription: String?
     let pricing: [Pricing]?
     let price: Double?
+    
+    // Local
+    var quantity: Int? = 0
 
     enum CodingKeys: String, CodingKey {
         case name

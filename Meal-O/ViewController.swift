@@ -60,6 +60,10 @@ class ViewController: UIViewController {
         // Navigation Bar Title
         self.title = "Restaurants"
         
+        // Navigation Bar Right Button
+        let rightBarButton = UIBarButtonItem(image: UIImage(named: "Cart")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(btnCartClicked))
+        self.navigationItem.rightBarButtonItem = rightBarButton
+        
         //Location Manager code to fetch current location
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
@@ -67,8 +71,8 @@ class ViewController: UIViewController {
         
         
         // Test Location, Stockton. California
-        self.currentLatitude = 37.7207259
-        self.currentLongitude = -121.4994523
+        self.currentLatitude = 37.5576008
+        self.currentLongitude = -121.9740721
         
         // Call Method
         self.getNearByRestaurants()
@@ -83,6 +87,14 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    
+    // MARK: - Cart Button
+    @objc func btnCartClicked() -> Void {
+        // Navigate to Restaurant Screen
+        let viewCTR = self.storyboard?.instantiateViewController(identifier: "Cart") as! Cart        
+        self.navigationController?.pushViewController(viewCTR, animated: true)
     }
 
 
@@ -215,20 +227,33 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         // Refresh CollectionView to Highlight selected cell
         self.collectionViewRestaurant.reloadItems(at: [indexPath])
         
-        // Load selected restaurant on the MAP
-        if self.selectedNearbyRestaurant.count > 0 {
-            self.loadSelectedRestaurantOnMap()
-        } else {
-            // Clear Polyline, Marker, etc.
-            self.mapView.clear()
-        }
+        
         
         
         // Navigate to Restaurant Screen
-        let viewCTR = self.storyboard?.instantiateViewController(identifier: "Restaurant") as! Restaurant
-        // Pass Data
-        viewCTR.restaurantObj = self.arrayNearbyRestaurant[indexPath.row]
-        self.navigationController?.pushViewController(viewCTR, animated: true)
+//        let viewCTR = self.storyboard?.instantiateViewController(identifier: "Restaurant") as! Restaurant
+//
+//        // Pass Data
+//        viewCTR.restaurantObj = self.arrayNearbyRestaurant[indexPath.row]
+//        viewCTR.arrayNearbyRestaurant = self.arrayNearbyRestaurant
+//
+//        self.navigationController?.pushViewController(viewCTR, animated: true)
+        
+        
+        
+        
+        // If no restaurant selected then remove Polyline and Markers from map
+        if self.selectedNearbyRestaurant.count <= 0 {
+            // Clear Polyline, Marker, etc.
+            self.mapView.clear()
+            
+        } else {
+            // Draw path between Source, Destination and WayPoints (if any)
+            self.loadSelectedRestaurantOnMap()
+            
+            // Draw Path
+            self.drawBox()
+        }
         
         
     }
@@ -264,14 +289,20 @@ extension ViewController {
         self.mapView.animate(with: update)
         
         // Pass Coordinates to draw path
-        let fromCoordinates = CLLocationCoordinate2D(latitude: self.currentLatitude, longitude: self.currentLongitude)
+//        let fromCoordinates = CLLocationCoordinate2D(latitude: self.currentLatitude, longitude: self.currentLongitude)
+//
+//        let latitude = self.selectedNearbyRestaurant.first?.geo?.lat ?? 0.0
+//        let longitude = self.selectedNearbyRestaurant.first?.geo?.lon ?? 0.0
+//
+//        let toCoordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//        //        self.getRoute(from: fromCoordinates, to: toCoordinates)
+//        self.fetchRoute(from: fromCoordinates, to: toCoordinates)
         
-        let latitude = self.selectedNearbyRestaurant.first?.geo?.lat ?? 0.0
-        let longitude = self.selectedNearbyRestaurant.first?.geo?.lon ?? 0.0
-        
-        let toCoordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        //        self.getRoute(from: fromCoordinates, to: toCoordinates)
-        self.fetchRoute(from: fromCoordinates, to: toCoordinates)
+        // We don't need Source and Destination because
+        // Current location will consider as Source
+        // Destination will be first selected restaurant
+        // Remaining selected restaurants will consider as WayPoints
+        self.fetchRoute()
     }
     
     
@@ -295,15 +326,63 @@ extension ViewController {
 // MARK: - Draw Route with MAPKIT
 extension ViewController {
     
-    func fetchRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) {
+//    func fetchRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) {
+    func fetchRoute() {
         
         let session = URLSession.shared
         
-        let urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=false&mode=driving&key=AIzaSyD2acd7GIfeeUgUYdswlfI1umkKrPNxu_o"
-                
-        let url = URL(string: urlString)
+//        let urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=false&mode=driving&key=AIzaSyD2acd7GIfeeUgUYdswlfI1umkKrPNxu_o"
         
-        let task = session.dataTask(with: url!, completionHandler: {
+        var urlString = ""
+        var arrayWaypoints = [String]()
+        var destinationLatitude = 0.0
+        var destinationLongitude = 0.0
+        
+        if self.selectedNearbyRestaurant.count == 1 {
+            let latitude = self.selectedNearbyRestaurant.first?.geo?.lat ?? 0.0
+            let longitude = self.selectedNearbyRestaurant.first?.geo?.lon ?? 0.0
+            
+            urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(self.currentLatitude),\(self.currentLongitude)&destination=\(latitude),\(longitude)&sensor=false&mode=driving&key=AIzaSyD2acd7GIfeeUgUYdswlfI1umkKrPNxu_o"
+        } else {
+            var index = 0
+            
+            for restaurant in self.selectedNearbyRestaurant {
+                let lat = restaurant.geo?.lat ?? 0.0
+                let long = restaurant.geo?.lon ?? 0.0
+                
+                if index == 0 {
+                    // Destination Coordinates
+                    destinationLatitude = lat
+                    destinationLongitude = long
+                    
+                } else {
+                    // Waypoints
+                    let strWayPoint = "\(lat),\(long)"
+                    arrayWaypoints.append(strWayPoint)
+                }
+                
+                // Increase Index
+                index = index + 1
+            }
+        }
+        
+        // Get string of Way Point
+        if arrayWaypoints.count > 0 {
+            let strWayPoints = arrayWaypoints.joined(separator: "|")
+            urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(self.currentLatitude),\(self.currentLongitude)&destination=\(destinationLatitude),\(destinationLongitude)&waypoints=\(strWayPoints)&key=AIzaSyD2acd7GIfeeUgUYdswlfI1umkKrPNxu_o"
+        }
+        
+        // Testing URL
+//        var urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=37.5509859,-121.9804076&destination=37.5463756,-121.9839984&waypoints=37.5437198,-121.9828605|37.5449522,-121.9839232|37.546411,-121.9832094&key=AIzaSyD2acd7GIfeeUgUYdswlfI1umkKrPNxu_o"
+        
+        // Format URL string
+        urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? ""
+                
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        
+        let task = session.dataTask(with: url, completionHandler: {
             (data, response, error) in
             
             guard error == nil else {
@@ -357,6 +436,44 @@ extension ViewController {
         })
         task.resume()
     }
+    
+    
+    func drawBox() {
+        
+        // Create Array
+        var arrayLatitude = [Double]()
+        var arrayLongitude = [Double]()
+        
+        // First Add Current Coordinates
+        arrayLatitude.append(self.currentLatitude)
+        arrayLongitude.append(self.currentLongitude)
+        
+        // Get first selected restaurant and add coordinates
+        arrayLatitude.append(self.selectedNearbyRestaurant.first?.geo?.lat ?? 0.0)
+        arrayLongitude.append(self.selectedNearbyRestaurant.first?.geo?.lon ?? 0.0)
+        
+
+
+        print(arrayLatitude) // Horizontal points
+        print(arrayLongitude) // vertical points
+
+        let maxxCoordinate = arrayLatitude.max() ?? 0.0
+        let minxCoordinate = arrayLatitude.min() ?? 0.0
+        let maxyCoordinate = arrayLongitude.max() ?? 0.0
+        let minyCoordinate = arrayLongitude.min() ?? 0.0
+
+        print(maxxCoordinate as Any)
+        print(minyCoordinate as Any)
+
+        print(minxCoordinate as Any)
+        print(maxyCoordinate as Any)
+
+        let fromCoordinates = CLLocationCoordinate2D(latitude: minxCoordinate - CompassPoint.min.rawValue, longitude: maxyCoordinate + CompassPoint.max.rawValue)
+        let toCoordinates = CLLocationCoordinate2D(latitude: maxxCoordinate + CompassPoint.min.rawValue, longitude: minyCoordinate - CompassPoint.max.rawValue)
+
+        self.drawRectangle(from: fromCoordinates, to: toCoordinates)
+    }
+    
     
     // Draw Rectangle
     func drawRectangle(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) {
@@ -417,63 +534,63 @@ extension ViewController {
         polyline.strokeColor = #colorLiteral(red: 0, green: 0.5628422499, blue: 0.3188166618, alpha: 1)
         polyline.map = mapView // Google MapView
         
-        if let dict = arraySteps.first as? [String: Any] {
-            
-            if let startLocation = dict["start_location"] as? [String: Any] {
-                
-                let latitude = startLocation["lat"] as? Double ?? 0.0
-                let longitude = startLocation["lng"] as? Double ?? 0.0
-                
-                latArray.append(latitude)
-                longArray.append(longitude)
-            }
-        }
-        
-        var arrayStepsOfCoordinates = [CLLocationCoordinate2D]()
-        for item in arraySteps {
-            if let dict = item as? [String: Any] {
-                if let endLocation = dict["end_location"] as? [String: Any] {
-                    
-                    let latitude = endLocation["lat"] as? Double ?? 0.0
-                    let longitude = endLocation["lng"] as? Double ?? 0.0
-                    
-                    latArray.append(latitude)
-                    longArray.append(longitude)
-                    
-                    print(latitude)
-                    print(longitude)
-
-                    
-                    let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                    arrayStepsOfCoordinates.append(coordinate)
-                }
-            }
-        }
-        
-        
-        print(latArray) // Horizontal points
-        print(longArray) // vertical points
-        
-        let maxxCoordinate = latArray.max() ?? 0.0
-        let minxCoordinate = latArray.min() ?? 0.0
-        let maxyCoordinate = longArray.max() ?? 0.0
-        let minyCoordinate = longArray.min() ?? 0.0
-        
-        print(maxxCoordinate as Any)
-        print(minyCoordinate as Any)
-        
-        print(minxCoordinate as Any)
-        print(maxyCoordinate as Any)
-        
-        let fromCoordinates = CLLocationCoordinate2D(latitude: minxCoordinate - CompassPoint.min.rawValue, longitude: maxyCoordinate + CompassPoint.max.rawValue)
-        let toCoordinates = CLLocationCoordinate2D(latitude: maxxCoordinate + CompassPoint.min.rawValue, longitude: minyCoordinate - CompassPoint.max.rawValue)
-        
-        self.drawRectangle(from: fromCoordinates, to: toCoordinates)
-        
-        let line = LineString(arrayStepsOfCoordinates)
-        let snapped = line.closestCoordinate(to: CLLocationCoordinate2D(latitude: 23.02771, longitude: 72.5068811))
-        print(snapped?.distance)
-        print(snapped?.coordinate)
+//        if let dict = arraySteps.first as? [String: Any] {
+//
+//            if let startLocation = dict["start_location"] as? [String: Any] {
+//
+//                let latitude = startLocation["lat"] as? Double ?? 0.0
+//                let longitude = startLocation["lng"] as? Double ?? 0.0
+//
+//                latArray.append(latitude)
+//                longArray.append(longitude)
+//            }
+//        }
+//
+//        var arrayStepsOfCoordinates = [CLLocationCoordinate2D]()
+//        for item in arraySteps {
+//            if let dict = item as? [String: Any] {
+//                if let endLocation = dict["end_location"] as? [String: Any] {
+//
+//                    let latitude = endLocation["lat"] as? Double ?? 0.0
+//                    let longitude = endLocation["lng"] as? Double ?? 0.0
+//
+//                    latArray.append(latitude)
+//                    longArray.append(longitude)
+//
+//                    print(latitude)
+//                    print(longitude)
+//
+//
+//                    let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//                    arrayStepsOfCoordinates.append(coordinate)
+//                }
+//            }
+//        }
+//
+//
+//        print(latArray) // Horizontal points
+//        print(longArray) // vertical points
+//
+//        let maxxCoordinate = latArray.max() ?? 0.0
+//        let minxCoordinate = latArray.min() ?? 0.0
+//        let maxyCoordinate = longArray.max() ?? 0.0
+//        let minyCoordinate = longArray.min() ?? 0.0
+//
+//        print(maxxCoordinate as Any)
+//        print(minyCoordinate as Any)
+//
+//        print(minxCoordinate as Any)
+//        print(maxyCoordinate as Any)
+//
+//        let fromCoordinates = CLLocationCoordinate2D(latitude: minxCoordinate - CompassPoint.min.rawValue, longitude: maxyCoordinate + CompassPoint.max.rawValue)
+//        let toCoordinates = CLLocationCoordinate2D(latitude: maxxCoordinate + CompassPoint.min.rawValue, longitude: minyCoordinate - CompassPoint.max.rawValue)
+//
+//        self.drawRectangle(from: fromCoordinates, to: toCoordinates)
+//
+//        let line = LineString(arrayStepsOfCoordinates)
+//        let snapped = line.closestCoordinate(to: CLLocationCoordinate2D(latitude: 23.02771, longitude: 72.5068811))
+//        print(snapped?.distance)
+//        print(snapped?.coordinate)
         
     }
     
